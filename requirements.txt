@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+pypdf
+langchain
+openai
+faiss-cpu
+streamlit
+python-dotenv
