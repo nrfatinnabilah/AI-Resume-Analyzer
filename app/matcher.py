@@ -1,32 +1,72 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+def calculate_match(resume_skills, job_description):
+
+    job_skill_list = extract_job_skills(job_description)
+
+    matched = []
+    missing = []
 
 
-def calculate_match(resume_text, job_description):
+    for skill in job_skill_list:
 
-    documents = [
-        resume_text,
-        job_description
-    ]
+        if skill.lower() in [
+            x.lower() for x in resume_skills
+        ]:
+            matched.append(skill)
 
-    vectorizer = TfidfVectorizer(
-        stop_words="english"
+        else:
+            missing.append(skill)
+
+
+    score = round(
+        len(matched) / len(job_skill_list) * 100,
+        2
     )
-
-    vectors = vectorizer.fit_transform(documents)
-
-    similarity = cosine_similarity(
-        vectors[0],
-        vectors[1]
-    )
-
-    score = round(similarity[0][0] * 100, 2)
 
 
     return {
         "match_percentage": score,
+        "matched_skills": matched,
+        "missing_skills": missing,
         "message": get_message(score)
     }
+
+
+
+def extract_job_skills(job_description):
+
+    skill_database = [
+        "Python",
+        "Java",
+        "Spring Boot",
+        "SQL",
+        "Machine Learning",
+        "Docker",
+        "Azure",
+        "FastAPI",
+        "REST API",
+        "AWS",
+        "Kubernetes",
+        "Git",
+        "Agile",
+        "PostgreSQL",
+        "MySQL",
+        "CI/CD",
+        "Microservices"
+    ]
+
+
+    detected = []
+
+    text = job_description.lower()
+
+
+    for skill in skill_database:
+
+        if skill.lower() in text:
+            detected.append(skill)
+
+
+    return detected
 
 
 

@@ -37,11 +37,11 @@ async def match_resume(
 
     resume_skills = extract_skills(resume_text)
 
-    job_skills = extract_skills(job_description)
 
     result = calculate_match(
         resume_skills,
-        job_skills
+        job_description
     )
+
 
     return result

@@ -8,28 +8,24 @@ def normalize_text(text):
 
 def extract_skills(text):
 
-    skills_data = [
+    skills_database = [
         "Python",
         "Java",
-        "C++",
-        "FastAPI",
         "Spring Boot",
         "SQL",
         "Machine Learning",
-        "TensorFlow",
-        "PyTorch",
         "Docker",
-        "AWS"
+        "FastAPI",
+        "Azure",
+        "REST API"
     ]
 
-    found_skills = []
+    detected = []
 
-    text_clean = normalize_text(text)
+    text_lower = text.lower()
 
-    for skill in skills_data:
-        skill_clean = skill.lower().replace(" ", "")
-        
-        if skill_clean in text_clean:
-            found_skills.append(skill)
+    for skill in skills_database:
+        if skill.lower() in text_lower:
+            detected.append(skill)
 
-    return found_skills
+    return detected
